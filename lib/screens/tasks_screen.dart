@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/components/tasks_list.dart';
+import 'package:todoey/screens/add_task.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
@@ -8,7 +9,8 @@ class TasksScreen extends StatelessWidget {
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // show Input field to add task
+          showModalBottomSheet(
+              context: context, builder: (context) => AddTaskScreen());
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
