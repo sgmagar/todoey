@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/components/tasks_list.dart';
 import 'package:todoey/screens/add_task.dart';
+import 'package:todoey/models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: 'This is a task.'),
+    Task(name: 'This is second task.'),
+    Task(name: 'This is third task.'),
+    Task(name: 'This is fourth task.')
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +23,15 @@ class TasksScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => AddTaskScreen());
+              context: context,
+              builder: (context) => AddTaskScreen(
+                    addTaskCallback: (value) {
+                      setState(() {
+                        tasks.add(Task(name: value));
+                      });
+                      Navigator.pop(context);
+                    },
+                  ));
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
@@ -63,7 +84,14 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(30.0),
                 ),
               ),
-              child: TasksList(),
+              child: TasksList(
+                tasks: tasks,
+                checkBoxCallback: (value, index) {
+                  setState(() {
+                    tasks[index].isDone = value;
+                  });
+                },
+              ),
             ),
           )
         ],
