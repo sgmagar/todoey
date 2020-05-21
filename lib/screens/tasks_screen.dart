@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/components/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
@@ -6,7 +7,9 @@ class TasksScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          // show Input field to add task
+        },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
       ),
@@ -58,24 +61,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(30.0),
                 ),
               ),
-              child: ListView(
-                children: <Widget>[
-                  ListTile(
-                    title: Text("Hello There"),
-                    trailing: Checkbox(
-                      value: false,
-                      onChanged: (value) {},
-                    ),
-                  ),
-                  ListTile(
-                    title: Text("Hello There"),
-                    trailing: Checkbox(
-                      value: false,
-                      onChanged: (value) {},
-                    ),
-                  )
-                ],
-              ),
+              child: TasksList(),
             ),
           )
         ],
